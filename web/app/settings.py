@@ -118,11 +118,25 @@ USE_TZ = True
 ######
 PRJ_APPS = [
     'gpress',
+    'api',
 ]
 STATIC_URL = '/static/'
 LANGUAGE_CODE = 'ja'
 TIME_ZONE = 'Asia/Tokyo'
 INSTALLED_APPS = INSTALLED_APPS + PRJ_APPS
+
+## API
+INSTALLED_APPS += [
+    'graphene_django',
+    'rest_framework', 'django_filters', 'rest_framework_filters',
+]
+GRAPHENE = {
+    'SCHEMA': 'api.schema.schema'
+}
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+] + MIDDLEWARE
+
 
 # Optional Databases
 if os.path.isfile(_SETTINGS('databases/__init__.py')):
