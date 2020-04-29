@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .. import models
-
+from . import inlines
 
 def default_list_display(model, exclude=[]):
     return [
@@ -12,7 +12,10 @@ def default_list_display(model, exclude=[]):
 @admin.register(models.WpPosts)
 class WpPostsAdmin(admin.ModelAdmin):
     list_display = default_list_display(models.WpPosts)
-
+    raw_id_fields = ['post_parent', ]
+    inlines = [
+        inlines.WpPostmetaInline,
+    ]
 
 @admin.register(models.WpLinks)
 class WpLinksAdmin(admin.ModelAdmin):

@@ -109,7 +109,10 @@ class WpOptions(models.Model):
 
 class WpPostmeta(models.Model):
     meta_id = models.BigAutoField(primary_key=True)
-    post_id = models.BigIntegerField()
+    #jpost_id = models.BigIntegerField()
+    post_id = models.ForeignKey(
+        'WpPosts', db_column='post_id', on_delete=models.CASCADE)
+    meta_key = models.CharField(max_length=255, blank=True, null=True)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
     meta_value = models.TextField(blank=True, null=True)
 
@@ -137,6 +140,12 @@ class WpPosts(models.Model):
     post_modified_gmt = models.DateTimeField()
     post_content_filtered = models.TextField()
     post_parent = models.BigIntegerField()
+    post_parent = models.ForeignKey(
+        'self', related_name='content_set',
+        null=True, blank=True,
+        default=0,
+        db_column='post_parent', on_delete=models.CASCADE)
+
     guid = models.CharField(max_length=255)
     menu_order = models.IntegerField()
     post_type = models.CharField(max_length=20)
@@ -147,6 +156,8 @@ class WpPosts(models.Model):
         managed = False
         db_table = 'wp_posts'
 
+    def __str__(self):
+        return self.post_title
 
 class WpTermRelationships(models.Model):
     object_id = models.BigIntegerField(primary_key=True)
