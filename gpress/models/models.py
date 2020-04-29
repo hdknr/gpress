@@ -9,16 +9,6 @@ from django.db import models
 import phpserialize
 
 
-class DjangoMigrations(models.Model):
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
 class WpCommentmeta(models.Model):
     meta_id = models.BigAutoField(primary_key=True)
     comment_id = models.BigIntegerField()
@@ -50,31 +40,6 @@ class WpComments(models.Model):
     class Meta:
         managed = False
         db_table = 'wp_comments'
-
-
-class WpEoEvents(models.Model):
-    event_id = models.BigAutoField(primary_key=True)
-    post_id = models.BigIntegerField()
-    startdate = models.DateField(db_column='StartDate')  # Field name made lowercase.
-    enddate = models.DateField(db_column='EndDate')  # Field name made lowercase.
-    starttime = models.TimeField(db_column='StartTime')  # Field name made lowercase.
-    finishtime = models.TimeField(db_column='FinishTime')  # Field name made lowercase.
-    event_occurrence = models.BigIntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'wp_eo_events'
-
-
-class WpEoVenuemeta(models.Model):
-    meta_id = models.BigAutoField(primary_key=True)
-    eo_venue_id = models.BigIntegerField()
-    meta_key = models.CharField(max_length=255, blank=True, null=True)
-    meta_value = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'wp_eo_venuemeta'
 
 
 class WpLinks(models.Model):
@@ -151,7 +116,7 @@ class WpPosts(models.Model):
     post_modified = models.DateTimeField()
     post_modified_gmt = models.DateTimeField()
     post_content_filtered = models.TextField()
-    post_parent = models.BigIntegerField()
+    # post_parent = models.BigIntegerField()
     post_parent = models.ForeignKey(
         'self', related_name='content_set',
         null=True, blank=True,
@@ -244,22 +209,3 @@ class WpUsers(models.Model):
     class Meta:
         managed = False
         db_table = 'wp_users'
-
-
-class WpWpufTransaction(models.Model):
-    user_id = models.BigIntegerField(blank=True, null=True)
-    status = models.CharField(max_length=255)
-    cost = models.CharField(max_length=255, blank=True, null=True)
-    post_id = models.CharField(max_length=20, blank=True, null=True)
-    pack_id = models.BigIntegerField(blank=True, null=True)
-    payer_first_name = models.TextField(blank=True, null=True)
-    payer_last_name = models.TextField(blank=True, null=True)
-    payer_email = models.TextField(blank=True, null=True)
-    payment_type = models.TextField(blank=True, null=True)
-    payer_address = models.TextField(blank=True, null=True)
-    transaction_id = models.TextField(blank=True, null=True)
-    created = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'wp_wpuf_transaction'
