@@ -30,4 +30,4 @@ class WpOptionsAdmin(admin.ModelAdmin):
 @admin.register(models.WpPostmeta)
 class WpPostmetaAdmin(admin.ModelAdmin):
     list_display = default_list_display(models.WpPostmeta)
-    # raw_id_fields = ['post', ]
+    raw_id_fields = ['post', ]

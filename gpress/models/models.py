@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+import phpserialize
 
 
 class DjangoMigrations(models.Model):
@@ -109,8 +110,8 @@ class WpOptions(models.Model):
 
 class WpPostmeta(models.Model):
     meta_id = models.BigAutoField(primary_key=True)
-    #jpost_id = models.BigIntegerField()
-    post_id = models.ForeignKey(
+    #post_id = models.BigIntegerField()
+    post = models.ForeignKey(
         'WpPosts', db_column='post_id', on_delete=models.CASCADE)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
@@ -119,6 +120,12 @@ class WpPostmeta(models.Model):
     class Meta:
         managed = False
         db_table = 'wp_postmeta'
+
+    @property
+    def meta_value_obj(self):
+        if self.meta_key == '_wp_attachment_metadata':
+            return phpserialize.loads(self.meta_value.encode('utf8'), decode_strings=True)
+        return self.meta_value
 
 
 class WpPosts(models.Model):
