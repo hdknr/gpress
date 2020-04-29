@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SETTINGS_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(SETTINGS_DIR)
+def _SETTINGS(p): return os.path.join(SETTINGS_DIR, p)
 
 
 # Quick-start development settings - unsuitable for production
@@ -113,7 +115,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+######
+PRJ_APPS = [
+    'gpress',
+]
 STATIC_URL = '/static/'
-#
 LANGUAGE_CODE = 'ja'
 TIME_ZONE = 'Asia/Tokyo'
+INSTALLED_APPS = INSTALLED_APPS + PRJ_APPS
+
+# Optional Databases
+if os.path.isfile(_SETTINGS('databases/__init__.py')):
+    DATABASE_ROUTERS = ['app.databases.routers.DatabaseRouter']
+    from . import databases 
+    DATABASES.update(databases.DATABASES)
+
+# Local Settings
+if os.path.isfile(_SETTINGS('local_settings.py')):
+    from .local_settings import *    # NOQA

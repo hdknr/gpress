@@ -7,6 +7,7 @@ authors = ["hdknr <gmail@hdknr.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 django = "^3.0.5"
+mysqlclient = "^1.4.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
