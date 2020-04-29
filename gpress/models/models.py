@@ -107,9 +107,14 @@ class WpOptions(models.Model):
         managed = False
         db_table = 'wp_options'
 
+META_ARRAYS = [
+    '_wp_attachment_metadata',
+    '_wp_attachment_backup_sizes',
+]
 
 class WpPostmeta(models.Model):
-    meta_id = models.BigAutoField(primary_key=True)
+    # meta_id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(primary_key=True, db_column='meta_id')
     #post_id = models.BigIntegerField()
     post = models.ForeignKey(
         'WpPosts', db_column='post_id', on_delete=models.CASCADE)
@@ -123,7 +128,7 @@ class WpPostmeta(models.Model):
 
     @property
     def meta_value_obj(self):
-        if self.meta_key == '_wp_attachment_metadata':
+        if self.meta_key in META_ARRAYS:
             return phpserialize.loads(self.meta_value.encode('utf8'), decode_strings=True)
         return self.meta_value
 

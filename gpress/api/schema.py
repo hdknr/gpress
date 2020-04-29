@@ -39,10 +39,18 @@ class Post(NodeMixin, DjangoObjectType):
         filterset_class = filters.PostFilter
         interfaces = (graphene.Node, )
 
+class Postmeta(NodeMixin, DjangoObjectType):
+    class Meta:
+        model = models.WpPostmeta
+        filterset_class = filters.PostmetaFilter
+        interfaces = (graphene.Node, )
 
 class Query(graphene.ObjectType):
     post = graphene.relay.Node.Field(Post)
     post_set = DjangoFilterConnectionField(Post)
+
+    postmeta = graphene.relay.Node.Field(Postmeta)
+    postmeta_set = DjangoFilterConnectionField(Postmeta)
 
 
 class Mutation(graphene.ObjectType):

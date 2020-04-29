@@ -40,7 +40,12 @@ class BaseModelSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(BaseModelSerializer):
-
     class Meta:
         model = models.WpPosts
+        fields = '__all__'
+
+class PostmetaSerializer(BaseModelSerializer):
+    meta_value_obj = serializers.JSONField(read_only=True)
+    class Meta:
+        model = models.WpPostmeta
         fields = '__all__'
