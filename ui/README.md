@@ -1,4 +1,12 @@
+# gpress ui
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## GraphQL
+
+~~~bash
+$ yarn add apollo-boost react-apollo graphql-tag graphql
+~~~
 
 ## Available Scripts
 

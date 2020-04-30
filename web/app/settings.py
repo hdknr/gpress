@@ -129,6 +129,7 @@ INSTALLED_APPS = INSTALLED_APPS + PRJ_APPS
 INSTALLED_APPS += [
     'graphene_django',
     'rest_framework', 'django_filters', 'rest_framework_filters',
+    'corsheaders',
 ]
 GRAPHENE = {
     'SCHEMA': 'api.schema.schema'
@@ -137,6 +138,13 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ] + MIDDLEWARE
 
+# CORS 
+CORS_ORIGIN_WHITELIST = [
+    'http://ubn1804:3000',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+CORS_ALLOW_CREDENTIALS = True   # CORS_ORIGIN_ALLOW_ALL = True  # No!!!!!
 
 # Optional Databases
 if os.path.isfile(_SETTINGS('databases/__init__.py')):
