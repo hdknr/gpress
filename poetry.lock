@@ -59,6 +59,14 @@ version = "0.1.0"
 
 [[package]]
 category = "main"
+description = "Composable command line interface toolkit"
+name = "click"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "7.1.2"
+
+[[package]]
+category = "main"
 description = "Cross-platform colored terminal text."
 marker = "sys_platform == \"win32\""
 name = "colorama"
@@ -140,6 +148,7 @@ djangorestframework = "*"
 reference = "a6fc6936ed4f70f1a1f9f4f66b7b5559cc9dcaac"
 type = "git"
 url = "https://github.com/philipn/django-rest-framework-filters.git"
+
 [[package]]
 category = "main"
 description = "GraphQL Framework for Python"
@@ -491,7 +500,7 @@ python-versions = "*"
 version = "0.1.9"
 
 [metadata]
-content-hash = "0e6ea7bb7885fccb558b579b106142cae5772e78df52779bb42920a5bda94693"
+content-hash = "b914e4577f2990061071c72e3e12f38cc23bb6a02228dc9b14eb2b5cfcc24771"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -518,6 +527,10 @@ attrs = [
 backcall = [
     {file = "backcall-0.1.0.tar.gz", hash = "sha256:38ecd85be2c1e78f77fd91700c76e14667dc21e2713b63876c0eb901196e01e4"},
     {file = "backcall-0.1.0.zip", hash = "sha256:bbbf4b1e5cd2bdb08f915895b51081c041bac22394fdfcfdfbe9f14b77c08bf2"},
+]
+click = [
+    {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
+    {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
 ]
 colorama = [
     {file = "colorama-0.4.3-py2.py3-none-any.whl", hash = "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff"},
