@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ~~~bash
 $ yarn add apollo-boost react-apollo graphql-tag graphql
+$ yarn add js-cookie
 ~~~
 
 ## Available Scripts

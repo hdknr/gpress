@@ -106,20 +106,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 ######
 PRJ_APPS = [
     'gpress',
     'api',
 ]
+# Static files (https://docs.djangoproject.com/en/3.0/howto/static-files/)
 STATIC_URL = '/static/'
 LANGUAGE_CODE = 'ja'
 TIME_ZONE = 'Asia/Tokyo'
@@ -138,7 +133,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ] + MIDDLEWARE
 
-# CORS 
+# CORS: https://github.com/adamchainz/django-cors-headers
 CORS_ORIGIN_WHITELIST = [
     'http://ubn1804:3000',
     'http://localhost:3000',
