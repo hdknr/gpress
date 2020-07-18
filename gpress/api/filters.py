@@ -2,17 +2,17 @@
 https://django-filter.readthedocs.io/en/master/
 '''
 
-import django_filters
+from apibase.filters import BaseFilter
 from .. import models
 
 
-class PostFilter(django_filters.FilterSet):
+class PostFilter(BaseFilter):
 
     class Meta:
         model = models.WpPosts
         exclude = ['']
 
-class PostmetaFilter(django_filters.FilterSet):
+class PostmetaFilter(BaseFilter):
 
     class Meta:
         model = models.WpPostmeta

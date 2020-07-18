@@ -1,8 +1,8 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from apibase.routers import DefaultRouter
 from . import viewsets
 
-router = DefaultRouter()
+router = DefaultRouter(root_view_name='api-gpress-root')
 router.register(r'post', viewsets.PostViewSet)
 router.register(r'postmeta', viewsets.PostmetaViewSet)
 
