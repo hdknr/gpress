@@ -134,14 +134,24 @@ MIDDLEWARE = [
 ] + MIDDLEWARE
 
 # CORS: https://github.com/adamchainz/django-cors-headers
-CORS_ORIGIN_WHITELIST = [
-    'http://ubn1804:3000',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+CORS_ORIGIN_REGEX_WHITELIST = [
+    r'http?://[^\.]+:\d+',
+    r'http://127.0.0.1:\d+',
 ]
 CORS_ALLOW_CREDENTIALS = True   # CORS_ORIGIN_ALLOW_ALL = True  # No!!!!!
+CORS_EXPOSE_HEADERS = [
+    'X-CSRFToken', 
+    'X-IsAuthenticated', ] 
+CORS_PREFLIGHT_MAX_AGE = 10
 
-# Optional Databases
+# CSRF
+# https://docs.djangoproject.com/en/3.0/ref/settings/#csrf-trusted-origins
+CSRF_TRUSTED_ORIGINS = [
+    'localhost:3000',
+    '127.0.0.01:3000',
+]
+
+# Database Routing
 if os.path.isfile(_SETTINGS('databases/__init__.py')):
     DATABASE_ROUTERS = ['app.databases.routers.DatabaseRouter']
     from . import databases 
