@@ -25,6 +25,6 @@ accesslog = os.path.join(LOGS, "gunicorn.access.log")
 errorlog = os.path.join(LOGS, "gunicorn.error.log")
 pidfile = os.path.join(LOGS, "gunicorn.pid")
 timeout = 180
-bind = "unix:" + os.path.join(LOGS, "gunicorn.sock")
-# bind = "127.0.0.1:8000"   # USE TCP
+# bind = "unix:" + os.path.join(LOGS, "gunicorn.sock")
+bind = "127.0.0.1:8900"   # USE TCP
 
