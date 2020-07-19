@@ -116,6 +116,7 @@ PRJ_APPS = [
 ]
 # Static files (https://docs.djangoproject.com/en/3.0/howto/static-files/)
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LANGUAGE_CODE = 'ja'
 TIME_ZONE = 'Asia/Tokyo'
 INSTALLED_APPS = INSTALLED_APPS + PRJ_APPS
