@@ -162,6 +162,10 @@ if os.path.isfile(_SETTINGS('databases/__init__.py')):
     DATABASE_ROUTERS = ['app.databases.routers.DatabaseRouter']
     from . import databases 
     DATABASES.update(databases.DATABASES)
+# Local Settings
+
+if os.path.isfile(_SETTINGS('loggings.py')):
+    from .loggings import *    # NOQA
 
 # Local Settings
 if os.path.isfile(_SETTINGS('local_settings.py')):
