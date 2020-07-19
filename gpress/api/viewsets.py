@@ -1,12 +1,12 @@
-from rest_framework import (
-    viewsets, response, decorators)
-from . import serializers, filters, permissions, paginations
+from rest_framework import viewsets
+from . import serializers, filters, permissions
 from .. import models
+from apibase import paginations
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = models.WpPosts.objects.all()
-    # permission_classes = [permissions.Permission, ]
+    permission_classes = [permissions.Permission, ]
     filter_class = filters.PostFilter
     serializer_class = serializers.PostSerializer
     pagination_class = paginations.Pagination
@@ -14,7 +14,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class PostmetaViewSet(viewsets.ModelViewSet):
     queryset = models.WpPostmeta.objects.all()
-    # permission_classes = [permissions.Permission, ]
+    permission_classes = [permissions.Permission, ]
     filter_class = filters.PostmetaFilter
     serializer_class = serializers.PostmetaSerializer
     pagination_class = paginations.Pagination
