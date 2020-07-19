@@ -1,6 +1,6 @@
 WORDPRESS = {
     'ENGINE': 'django.db.backends.mysql',
-    'HOST': 'localhost',
+    'HOST': 'ubn1804',
     'NAME': 'wparticle',
     'USER': 'wparticle',
     'PASSWORD': 'wparticle',
