@@ -40,6 +40,8 @@ class Post(NodeMixin, DjangoObjectType):
         interfaces = (graphene.Node, )
 
 class Postmeta(NodeMixin, DjangoObjectType):
+    meta_value_obj = graphene.JSONString()
+
     class Meta:
         model = models.WpPostmeta
         filterset_class = filters.PostmetaFilter

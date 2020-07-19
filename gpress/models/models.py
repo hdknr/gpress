@@ -82,7 +82,8 @@ class WpPostmeta(models.Model):
     id = models.BigAutoField(primary_key=True, db_column='meta_id')
     #post_id = models.BigIntegerField()
     post = models.ForeignKey(
-        'WpPosts', db_column='post_id', on_delete=models.CASCADE)
+        'WpPosts', related_name='postmeta_set', 
+        db_column='post_id', on_delete=models.CASCADE)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
     meta_value = models.TextField(blank=True, null=True)
@@ -134,7 +135,7 @@ class WpPosts(models.Model):
         db_table = 'wp_posts'
 
     def __str__(self):
-        return self.post_title
+        return self.post_title and self.post_title[:50] or ''
 
 class WpTermRelationships(models.Model):
     object_id = models.BigIntegerField(primary_key=True)
