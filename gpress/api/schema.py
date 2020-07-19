@@ -10,7 +10,7 @@ from . import filters
 
 class Post(NodeMixin, DjangoObjectType):
     class Meta:
-        model = models.WpPosts
+        model = models.Post
         filterset_class = filters.PostFilter
         interfaces = (graphene.Node, )
 
@@ -19,7 +19,7 @@ class Postmeta(NodeMixin, DjangoObjectType):
     meta_value_obj = GenericScalar()
 
     class Meta:
-        model = models.WpPostmeta
+        model = models.Postmeta
         filterset_class = filters.PostmetaFilter
         interfaces = (graphene.Node, )
 

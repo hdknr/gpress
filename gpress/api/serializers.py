@@ -5,12 +5,12 @@ from .. import models
 
 class PostSerializer(BaseModelSerializer):
     class Meta:
-        model = models.WpPosts
+        model = models.Post
         fields = '__all__'
 
 
 class PostmetaSerializer(BaseModelSerializer):
     meta_value_obj = serializers.JSONField(read_only=True)
     class Meta:
-        model = models.WpPostmeta
+        model = models.Postmeta
         fields = '__all__'

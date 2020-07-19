@@ -5,7 +5,7 @@ from apibase import paginations
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = models.WpPosts.objects.all()
+    queryset = models.Post.objects.all()
     permission_classes = [permissions.Permission, ]
     filter_class = filters.PostFilter
     serializer_class = serializers.PostSerializer
@@ -13,7 +13,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class PostmetaViewSet(viewsets.ModelViewSet):
-    queryset = models.WpPostmeta.objects.all()
+    queryset = models.Postmeta.objects.all()
     permission_classes = [permissions.Permission, ]
     filter_class = filters.PostmetaFilter
     serializer_class = serializers.PostmetaSerializer

@@ -2,6 +2,6 @@ from django.contrib import admin
 from .. import models
 
 
-class WpPostmetaInline(admin.TabularInline):
-    model = models.WpPostmeta
+class PostmetaInline(admin.TabularInline):
+    model = models.Postmeta
     extra = 0

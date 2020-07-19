@@ -9,11 +9,11 @@ from .. import models
 class PostFilter(BaseFilter):
 
     class Meta:
-        model = models.WpPosts
+        model = models.Post
         exclude = ['']
 
 class PostmetaFilter(BaseFilter):
 
     class Meta:
-        model = models.WpPostmeta
+        model = models.Postmeta
         exclude = ['']

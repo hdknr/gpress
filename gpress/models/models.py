@@ -9,7 +9,7 @@ from django.db import models
 import phpserialize
 
 
-class WpCommentmeta(models.Model):
+class Commentmeta(models.Model):
     meta_id = models.BigAutoField(primary_key=True)
     comment_id = models.BigIntegerField()
     meta_key = models.CharField(max_length=255, blank=True, null=True)
@@ -20,7 +20,7 @@ class WpCommentmeta(models.Model):
         db_table = 'wp_commentmeta'
 
 
-class WpComments(models.Model):
+class Comment(models.Model):
     comment_id = models.BigAutoField(db_column='comment_ID', primary_key=True)  # Field name made lowercase.
     comment_post_id = models.BigIntegerField(db_column='comment_post_ID')  # Field name made lowercase.
     comment_author = models.TextField()
@@ -42,7 +42,7 @@ class WpComments(models.Model):
         db_table = 'wp_comments'
 
 
-class WpLinks(models.Model):
+class Link(models.Model):
     link_id = models.BigAutoField(primary_key=True)
     link_url = models.CharField(max_length=255)
     link_name = models.CharField(max_length=255)
@@ -62,7 +62,7 @@ class WpLinks(models.Model):
         db_table = 'wp_links'
 
 
-class WpOptions(models.Model):
+class Option(models.Model):
     option_id = models.BigAutoField(primary_key=True)
     option_name = models.CharField(unique=True, max_length=191)
     option_value = models.TextField()
@@ -77,12 +77,12 @@ META_ARRAYS = [
     '_wp_attachment_backup_sizes',
 ]
 
-class WpPostmeta(models.Model):
+class Postmeta(models.Model):
     # meta_id = models.BigAutoField(primary_key=True)
     id = models.BigAutoField(primary_key=True, db_column='meta_id')
     #post_id = models.BigIntegerField()
     post = models.ForeignKey(
-        'WpPosts', related_name='postmeta_set', 
+        'Post', related_name='postmeta_set', 
         db_column='post_id', on_delete=models.CASCADE)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
@@ -99,7 +99,7 @@ class WpPostmeta(models.Model):
         return self.meta_value
 
 
-class WpPosts(models.Model):
+class Post(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     post_author = models.BigIntegerField()
     post_date = models.DateTimeField()
@@ -137,7 +137,7 @@ class WpPosts(models.Model):
     def __str__(self):
         return self.post_title and self.post_title[:50] or ''
 
-class WpTermRelationships(models.Model):
+class TermRelationship(models.Model):
     object_id = models.BigIntegerField(primary_key=True)
     term_taxonomy_id = models.BigIntegerField()
     term_order = models.IntegerField()
@@ -148,7 +148,7 @@ class WpTermRelationships(models.Model):
         unique_together = (('object_id', 'term_taxonomy_id'),)
 
 
-class WpTermTaxonomy(models.Model):
+class TermTaxonomy(models.Model):
     term_taxonomy_id = models.BigAutoField(primary_key=True)
     term_id = models.BigIntegerField()
     taxonomy = models.CharField(max_length=32)
@@ -162,7 +162,7 @@ class WpTermTaxonomy(models.Model):
         unique_together = (('term_id', 'taxonomy'),)
 
 
-class WpTermmeta(models.Model):
+class Termmeta(models.Model):
     meta_id = models.BigAutoField(primary_key=True)
     term_id = models.BigIntegerField()
     meta_key = models.CharField(max_length=255, blank=True, null=True)
@@ -173,7 +173,7 @@ class WpTermmeta(models.Model):
         db_table = 'wp_termmeta'
 
 
-class WpTerms(models.Model):
+class Term(models.Model):
     term_id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=200)
     slug = models.CharField(max_length=200)
@@ -184,7 +184,7 @@ class WpTerms(models.Model):
         db_table = 'wp_terms'
 
 
-class WpUsermeta(models.Model):
+class Usermeta(models.Model):
     umeta_id = models.BigAutoField(primary_key=True)
     user_id = models.BigIntegerField()
     meta_key = models.CharField(max_length=255, blank=True, null=True)
@@ -195,7 +195,7 @@ class WpUsermeta(models.Model):
         db_table = 'wp_usermeta'
 
 
-class WpUsers(models.Model):
+class User(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     user_login = models.CharField(max_length=60)
     user_pass = models.CharField(max_length=255)
