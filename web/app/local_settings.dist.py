@@ -21,3 +21,4 @@ DATABASES = {
 ALLOWED_HOSTS = ['www.foo.com', ]
 FORCE_SCRIPT_NAME = '/gpress'
 STATIC_URL = '/gpress/static/'
+LOGIN_URL = '/gpress/api/auth/login/'
