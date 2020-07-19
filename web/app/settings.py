@@ -130,11 +130,16 @@ INSTALLED_APPS += [
 GRAPHENE = {
     'SCHEMA': 'api.schema.schema'
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework_filters.backends.RestFrameworkFilterBackend', ),   # NOQA
+}
+
+# CORS: https://github.com/adamchainz/django-cors-headers
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ] + MIDDLEWARE
 
-# CORS: https://github.com/adamchainz/django-cors-headers
 CORS_ORIGIN_REGEX_WHITELIST = [
     r'http?://[^\.]+:\d+',
     r'http://127.0.0.1:\d+',
