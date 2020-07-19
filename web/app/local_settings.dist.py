@@ -19,4 +19,5 @@ DATABASES = {
     'wordpress': WORDPRESS,
 }
 ALLOWED_HOSTS = ['www.foo.com', ]
-
+FORCE_SCRIPT_NAME = '/gpress'
+STATIC_URL = '/gpress/static/'
