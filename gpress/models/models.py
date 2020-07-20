@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 import phpserialize
+from django.utils.functional import cached_property
 
 
 class Commentmeta(models.Model):
@@ -137,6 +138,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.post_title and self.post_title[:50] or ''
+
+    @cached_property
+    def parent(self):
+        return self._meta.model.objects.filter(id=self.post_parent).first()
+
+    @cached_property
+    def content_set(self):
+        return self._meta.model.objects.filter(post_parent=self.id).first()
+
 
 class TermRelationship(models.Model):
     object_id = models.BigIntegerField(primary_key=True)
