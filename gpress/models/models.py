@@ -117,12 +117,13 @@ class Post(models.Model):
     post_modified = models.DateTimeField()
     post_modified_gmt = models.DateTimeField()
     post_content_filtered = models.TextField()
-    # post_parent = models.BigIntegerField()
-    post_parent = models.ForeignKey(
-        'self', related_name='content_set',
-        null=True, blank=True,
-        default=0,
-        db_column='post_parent', on_delete=models.CASCADE)
+    post_parent = models.BigIntegerField()
+    #     post_parent = models.ForeignKey(
+    #         'self', related_name='content_set',
+    #         null=True, blank=True,
+    #         #default=0,
+    #         default=None,
+    #         db_column='post_parent', on_delete=models.CASCADE)
 
     guid = models.CharField(max_length=255)
     menu_order = models.IntegerField()
