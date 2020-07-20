@@ -2,6 +2,7 @@ from django.http import Http404
 import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.rest_framework.mutation import SerializerMutation
+from graphql_relay import from_global_id
 from . import serializers
 
 
@@ -12,16 +13,22 @@ class Post(SerializerMutation):
         lookup_field = 'id'
 
 
-class Mutation(graphene.ObjectType):
-    post = Post.Field()
+class Postmeta(SerializerMutation):
+    class Meta:
+        serializer_class = serializers.PostmetaSerializer
+        model_operations = ['create', 'update']
+        lookup_field = 'id'
+
 
     @classmethod
     def get_serializer_kwargs(cls, root, info, **input):
-        if 'id' in input:
-            instance = Post.objects.filter(id=input['id']).first()
-            if instance:
-                return {'instance': instance, 'data': input, 'partial': True}
-            else:
-                raise Http404
+        client_mutation_id = input.get('client_mutation_id', None) 
+        if isinstance(client_mutation_id, str):
+            _, id = from_global_id(client_mutation_id)
+            input['id'] = id
+        return super().get_serializer_kwargs(root, info, **input)
 
-        return {'data': input, 'partial': False}
+
+class Mutation(graphene.ObjectType):
+    post = Post.Field()
+    postmeta = Postmeta.Field()

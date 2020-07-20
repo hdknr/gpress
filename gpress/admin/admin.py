@@ -17,7 +17,6 @@ def default_list_display(model, exclude=[]):
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = default_list_display(models.Post)
-    raw_id_fields = ['post_parent', ]
     inlines = [
         inlines.PostmetaInline,
     ]
