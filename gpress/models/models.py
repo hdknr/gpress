@@ -86,7 +86,6 @@ class Postmeta(models.Model):
         'Post', related_name='postmeta_set', 
         db_column='post_id', on_delete=models.CASCADE)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
-    meta_key = models.CharField(max_length=255, blank=True, null=True)
     meta_value = models.TextField(blank=True, null=True)
 
     class Meta:
