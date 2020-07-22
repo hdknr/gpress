@@ -39,6 +39,5 @@ $ bin/wp-cli.phar server --host=0.0.0.0 --port=9100 --path=$PWD/wordpress/sample
 $ echo yarn >> $NODENV_ROOT/default-packages
 $ nodenv install 13.11.0
 $ nodenv global 13.11.0
-$ npm install -g create-react-app
-$ npx create-react-app ui
+$ npm uninstall -g create-react-app && npm install -g create-react-app
 ~~~
