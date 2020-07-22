@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 import phpserialize
+from django.utils.functional import cached_property
 
 
 class Commentmeta(models.Model):
@@ -85,7 +86,6 @@ class Postmeta(models.Model):
         'Post', related_name='postmeta_set', 
         db_column='post_id', on_delete=models.CASCADE)
     meta_key = models.CharField(max_length=255, blank=True, null=True)
-    meta_key = models.CharField(max_length=255, blank=True, null=True)
     meta_value = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -117,12 +117,13 @@ class Post(models.Model):
     post_modified = models.DateTimeField()
     post_modified_gmt = models.DateTimeField()
     post_content_filtered = models.TextField()
-    # post_parent = models.BigIntegerField()
-    post_parent = models.ForeignKey(
-        'self', related_name='content_set',
-        null=True, blank=True,
-        default=0,
-        db_column='post_parent', on_delete=models.CASCADE)
+    post_parent = models.BigIntegerField()
+    #     post_parent = models.ForeignKey(
+    #         'self', related_name='content_set',
+    #         null=True, blank=True,
+    #         #default=0,
+    #         default=None,
+    #         db_column='post_parent', on_delete=models.CASCADE)
 
     guid = models.CharField(max_length=255)
     menu_order = models.IntegerField()
@@ -136,6 +137,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.post_title and self.post_title[:50] or ''
+
+    @cached_property
+    def parent(self):
+        return self._meta.model.objects.filter(id=self.post_parent).first()
+
+    @cached_property
+    def content_set(self):
+        return self._meta.model.objects.filter(post_parent=self.id).first()
+
 
 class TermRelationship(models.Model):
     object_id = models.BigIntegerField(primary_key=True)

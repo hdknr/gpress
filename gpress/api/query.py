@@ -31,6 +31,3 @@ class Query(graphene.ObjectType):
     postmeta = graphene.relay.Node.Field(Postmeta)
     postmeta_set = NodeSet(Postmeta)
 
-
-class Mutation(graphene.ObjectType):
-    pass
