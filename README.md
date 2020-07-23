@@ -57,3 +57,10 @@ $ npm uninstall -g create-react-app && npm install -g create-react-app
 ~~~zsh
 % npm run gen:graphql
 ~~~
+
+## Apollo
+
+~~~zsh
+% npm install @apollo/client graphql --save-dev
+% npm install @apollo/react-common @apollo/react-hooks --save-dev
+~~~
