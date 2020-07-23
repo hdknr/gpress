@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import './App.css';
-import { Header, Main } from "../shared";
+import { Header, Main } from "../layout";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const App: React.FunctionComponent = () => {
