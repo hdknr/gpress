@@ -1,0 +1,230 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+scalar DateTime
+
+type ErrorType {
+  field: String!
+  messages: [String!]!
+}
+
+scalar GenericScalar
+
+scalar JSONString
+
+type Mutation {
+  post(input: PostInput!): PostPayload
+  postmeta(input: PostmetaInput!): PostmetaPayload
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Post implements Node {
+  id: ID!
+  post_author: Int!
+  post_date: DateTime!
+  post_date_gmt: DateTime!
+  post_content: String!
+  post_title: String!
+  post_excerpt: String!
+  post_status: String!
+  comment_status: String!
+  ping_status: String!
+  post_password: String!
+  post_name: String!
+  to_ping: String!
+  pinged: String!
+  post_modified: DateTime!
+  post_modified_gmt: DateTime!
+  post_content_filtered: String!
+  post_parent: Int!
+  guid: String!
+  menu_order: Int!
+  post_type: String!
+  post_mime_type: String!
+  comment_count: Int!
+  postmeta_set(
+    before: String
+    after: String
+    first: Int
+    last: Int
+    post: ID
+    meta_key: String
+    meta_value: String
+    pk: Float
+  ): PostmetaConnection!
+  pk: Int
+  endpoint: String
+}
+
+input PostInput {
+  post_author: Int!
+  post_date: DateTime!
+  post_date_gmt: DateTime!
+  post_content: String!
+  post_title: String!
+  post_excerpt: String!
+  post_status: String!
+  comment_status: String!
+  ping_status: String!
+  post_password: String!
+  post_name: String!
+  to_ping: String!
+  pinged: String!
+  post_modified: DateTime!
+  post_modified_gmt: DateTime!
+  post_content_filtered: String!
+  post_parent: Int!
+  guid: String!
+  menu_order: Int!
+  post_type: String!
+  post_mime_type: String!
+  comment_count: Int!
+  clientMutationId: String
+}
+
+type PostNodeSetConnection {
+  pageInfo: PageInfo!
+  edges: [PostNodeSetEdge]!
+  total_count: Int
+  records: Int
+}
+
+type PostNodeSetEdge {
+  node: Post
+  cursor: String!
+}
+
+type PostPayload {
+  id: Int
+  endpoint: String
+  post_author: Int
+  post_date: DateTime
+  post_date_gmt: DateTime
+  post_content: String
+  post_title: String
+  post_excerpt: String
+  post_status: String
+  comment_status: String
+  ping_status: String
+  post_password: String
+  post_name: String
+  to_ping: String
+  pinged: String
+  post_modified: DateTime
+  post_modified_gmt: DateTime
+  post_content_filtered: String
+  post_parent: Int
+  guid: String
+  menu_order: Int
+  post_type: String
+  post_mime_type: String
+  comment_count: Int
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+type Postmeta implements Node {
+  id: ID!
+  post: Post!
+  meta_key: String
+  meta_value: String
+  pk: Int
+  endpoint: String
+  meta_value_obj: GenericScalar
+}
+
+type PostmetaConnection {
+  pageInfo: PageInfo!
+  edges: [PostmetaEdge]!
+}
+
+type PostmetaEdge {
+  node: Postmeta
+  cursor: String!
+}
+
+input PostmetaInput {
+  meta_key: String
+  meta_value: String
+  post: String!
+  clientMutationId: String
+}
+
+type PostmetaNodeSetConnection {
+  pageInfo: PageInfo!
+  edges: [PostmetaNodeSetEdge]!
+  total_count: Int
+  records: Int
+}
+
+type PostmetaNodeSetEdge {
+  node: Postmeta
+  cursor: String!
+}
+
+type PostmetaPayload {
+  id: Int
+  endpoint: String
+  meta_value_obj: JSONString
+  meta_key: String
+  meta_value: String
+  post: String
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+type Query {
+  post(id: ID!): Post
+  post_set(
+    before: String
+    after: String
+    first: Int
+    last: Int
+    post_author: Int
+    post_date: DateTime
+    post_date_gmt: DateTime
+    post_content: String
+    post_title: String
+    post_excerpt: String
+    post_status: String
+    comment_status: String
+    ping_status: String
+    post_password: String
+    post_name: String
+    to_ping: String
+    pinged: String
+    post_modified: DateTime
+    post_modified_gmt: DateTime
+    post_content_filtered: String
+    post_parent: Int
+    guid: String
+    menu_order: Int
+    post_type: String
+    post_mime_type: String
+    comment_count: Int
+    pk: Float
+  ): PostNodeSetConnection
+  postmeta(id: ID!): Postmeta
+  postmeta_set(
+    before: String
+    after: String
+    first: Int
+    last: Int
+    post: ID
+    meta_key: String
+    meta_value: String
+    pk: Float
+  ): PostmetaNodeSetConnection
+}

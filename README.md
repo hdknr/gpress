@@ -46,6 +46,7 @@ $ npm uninstall -g create-react-app && npm install -g create-react-app
 
 ~~~zsh
 % npm install --save graphql
-% npm install --save-dev @graphql-codegen/cli
+% npm install --save-dev @graphql-codegen/cli -g
 % npm install --save-dev @graphql-codegen/typescript
+% npm install --save-dev @graphql-codegen/typescript-operations
 ~~~
