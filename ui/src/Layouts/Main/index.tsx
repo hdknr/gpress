@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Top, Post} from '../../pages';
+import { Top, Post} from '../../Pages';
 
 export const Main: React.FunctionComponent = () => {
     return (
@@ -9,7 +9,7 @@ export const Main: React.FunctionComponent = () => {
                 <Route path="/" exact>
                     <Top/>
                 </Route>
-                <Route path="/post" exact>
+                <Route path="/post" >
                     <Post/>
                 </Route>
             </Switch>

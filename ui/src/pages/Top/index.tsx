@@ -5,5 +5,5 @@ export const Top: React.FunctionComponent = () => {
         <div>
             <h4>Top</h4>
         </div>
-        );
+    );
 };
