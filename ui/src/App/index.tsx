@@ -1,8 +1,7 @@
 import React from 'react';
 import './index.css';
 import './App.css';
-import { Header } from "../shared/Header";
-import { Main } from "../shared/Main";
+import { Header, Main } from "../shared";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const App: React.FunctionComponent = () => {
