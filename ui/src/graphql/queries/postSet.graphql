@@ -1,0 +1,17 @@
+query postSet($first: Int, $after: String, $before: String) {
+  post_set(first: $first, after: $after, before: $before) {
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
+    edges {
+      node {
+        pk
+        id
+        endpoint
+      }
+    }
+  }
+}

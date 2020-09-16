@@ -27,7 +27,6 @@ node_modules
 web/app/local_settings.py
 web/static
 web/theme/static/lib
-yarn.lock
 covers
 .coverage
 web/webapp/static/webapp
@@ -42,7 +41,6 @@ ansible/data
 
 # vue.js 
 node_modules
-package-lock.json
 web/ui/static/bundles
 web/ui/modules.json
 web/ui/sources.json
