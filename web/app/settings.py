@@ -113,6 +113,10 @@ USE_TZ = True
 PRJ_APPS = [
     'gpress',
     'api',
+    'frontend',
+]
+PRJ_MIDDLEWARE = [
+    'app.middleware.CorsMiddleware',
 ]
 # Static files (https://docs.djangoproject.com/en/3.0/howto/static-files/)
 STATIC_URL = '/static/'
@@ -138,10 +142,11 @@ REST_FRAMEWORK = {
 # CORS: https://github.com/adamchainz/django-cors-headers
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-] + MIDDLEWARE
+] + MIDDLEWARE + PRJ_MIDDLEWARE
 
 CORS_ORIGIN_REGEX_WHITELIST = [
-    r'http?://[^\.]+:\d+',
+    r'https?://[^\.]+:\d+',
+    r'https?://localhost:\d+',
     r'http://127.0.0.1:\d+',
 ]
 CORS_ALLOW_CREDENTIALS = True   # CORS_ORIGIN_ALLOW_ALL = True  # No!!!!!
@@ -169,6 +174,8 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+FRONTEND_PATH = os.path.join(os.path.dirname(BASE_DIR), 'ui/build')
 
 # Database Routing
 if os.path.isfile(_SETTINGS('databases/__init__.py')):
