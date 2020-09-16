@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -38,6 +38,11 @@ export type MutationPostArgs = {
 
 export type MutationPostmetaArgs = {
   input: PostmetaInput;
+};
+
+export type MySubscription = {
+  __typename?: 'MySubscription';
+  event?: Maybe<Scalars['String']>;
 };
 
 export type Node = {
@@ -95,6 +100,7 @@ export type PostPostmeta_SetArgs = {
 };
 
 export type PostInput = {
+  id?: Maybe<Scalars['Int']>;
   post_author: Scalars['Int'];
   post_date: Scalars['DateTime'];
   post_date_gmt: Scalars['DateTime'];
@@ -188,6 +194,7 @@ export type PostmetaEdge = {
 };
 
 export type PostmetaInput = {
+  id?: Maybe<Scalars['Int']>;
   meta_key?: Maybe<Scalars['String']>;
   meta_value?: Maybe<Scalars['String']>;
   post: Scalars['String'];
@@ -279,6 +286,17 @@ export type QueryPostmeta_SetArgs = {
   meta_key?: Maybe<Scalars['String']>;
   meta_value?: Maybe<Scalars['String']>;
   pk?: Maybe<Scalars['Float']>;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  my_subscription?: Maybe<MySubscription>;
+};
+
+
+export type SubscriptionMy_SubscriptionArgs = {
+  arg1?: Maybe<Scalars['String']>;
+  arg2?: Maybe<Scalars['String']>;
 };
 
 export type PostSetQueryVariables = Exact<{

@@ -1,6 +1,7 @@
 schema {
   query: Query
   mutation: Mutation
+  subscription: Subscription
 }
 
 scalar DateTime
@@ -17,6 +18,10 @@ scalar JSONString
 type Mutation {
   post(input: PostInput!): PostPayload
   postmeta(input: PostmetaInput!): PostmetaPayload
+}
+
+type MySubscription {
+  event: String
 }
 
 interface Node {
@@ -54,21 +59,13 @@ type Post implements Node {
   post_type: String!
   post_mime_type: String!
   comment_count: Int!
-  postmeta_set(
-    before: String
-    after: String
-    first: Int
-    last: Int
-    post: ID
-    meta_key: String
-    meta_value: String
-    pk: Float
-  ): PostmetaConnection!
+  postmeta_set(before: String, after: String, first: Int, last: Int, post: ID, meta_key: String, meta_value: String, pk: Float): PostmetaConnection!
   pk: Int
   endpoint: String
 }
 
 input PostInput {
+  id: Int
   post_author: Int!
   post_date: DateTime!
   post_date_gmt: DateTime!
@@ -156,6 +153,7 @@ type PostmetaEdge {
 }
 
 input PostmetaInput {
+  id: Int
   meta_key: String
   meta_value: String
   post: String!
@@ -187,44 +185,11 @@ type PostmetaPayload {
 
 type Query {
   post(id: ID!): Post
-  post_set(
-    before: String
-    after: String
-    first: Int
-    last: Int
-    post_author: Int
-    post_date: DateTime
-    post_date_gmt: DateTime
-    post_content: String
-    post_title: String
-    post_excerpt: String
-    post_status: String
-    comment_status: String
-    ping_status: String
-    post_password: String
-    post_name: String
-    to_ping: String
-    pinged: String
-    post_modified: DateTime
-    post_modified_gmt: DateTime
-    post_content_filtered: String
-    post_parent: Int
-    guid: String
-    menu_order: Int
-    post_type: String
-    post_mime_type: String
-    comment_count: Int
-    pk: Float
-  ): PostNodeSetConnection
+  post_set(before: String, after: String, first: Int, last: Int, post_author: Int, post_date: DateTime, post_date_gmt: DateTime, post_content: String, post_title: String, post_excerpt: String, post_status: String, comment_status: String, ping_status: String, post_password: String, post_name: String, to_ping: String, pinged: String, post_modified: DateTime, post_modified_gmt: DateTime, post_content_filtered: String, post_parent: Int, guid: String, menu_order: Int, post_type: String, post_mime_type: String, comment_count: Int, pk: Float): PostNodeSetConnection
   postmeta(id: ID!): Postmeta
-  postmeta_set(
-    before: String
-    after: String
-    first: Int
-    last: Int
-    post: ID
-    meta_key: String
-    meta_value: String
-    pk: Float
-  ): PostmetaNodeSetConnection
+  postmeta_set(before: String, after: String, first: Int, last: Int, post: ID, meta_key: String, meta_value: String, pk: Float): PostmetaNodeSetConnection
+}
+
+type Subscription {
+  my_subscription(arg1: String, arg2: String): MySubscription
 }
