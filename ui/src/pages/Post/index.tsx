@@ -6,12 +6,8 @@ import { Detail } from './Detail';
 export const Post: React.FunctionComponent = () => {
     return (
         <Switch>
-            <Route path="/post/:postId">
-                <Detail />
-            </Route>
-            <Route path="/post/">
-                <List />
-            </Route>
+            <Route path="/frontend/post/:postId" component={Detail} />
+            <Route path="/frontend/post/" component={List} />
         </Switch>
     );
 };

@@ -113,6 +113,7 @@ USE_TZ = True
 PRJ_APPS = [
     'gpress',
     'api',
+    'frontend',
 ]
 PRJ_MIDDLEWARE = [
     'app.middleware.CorsMiddleware',
@@ -160,6 +161,8 @@ CSRF_TRUSTED_ORIGINS = [
     'localhost:3000',
     '127.0.0.01:3000',
 ]
+
+FRONTEND_PATH = os.path.join(os.path.dirname(BASE_DIR), 'ui/build')
 
 # Database Routing
 if os.path.isfile(_SETTINGS('databases/__init__.py')):
