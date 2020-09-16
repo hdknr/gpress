@@ -156,6 +156,19 @@ CSRF_TRUSTED_ORIGINS = [
     'localhost:3000',
     '127.0.0.01:3000',
 ]
+# WebSocket
+INSTALLED_APPS += [
+    'channels',
+]
+ASGI_APPLICATION = 'app.routing.application'    # ASGI
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database Routing
 if os.path.isfile(_SETTINGS('databases/__init__.py')):
