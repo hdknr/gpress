@@ -1,6 +1,6 @@
 from graphene_django.views import GraphQLView
 from django.urls import path, include
-from . import views
+from . import views, schema
 
 
 urlpatterns = [
@@ -8,4 +8,9 @@ urlpatterns = [
     path('rest/gpress/', include('gpress.api.urls')),
     path('auth/', include('rest_framework.urls')),
     path('', views.index),
+]
+
+
+websocket_urlpatterns = [
+    path('ws/graphql/', schema.SchemaWsConsumer),
 ]

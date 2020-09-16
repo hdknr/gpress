@@ -2,6 +2,8 @@ import graphene
 from gpress.api import (
     query as gpress_query, mutation as gpress_mutation, )
 
+from .consumers import GraphqlWsConsumer
+
 
 class Query(
     gpress_query.Query,
@@ -21,3 +23,7 @@ schema = graphene.Schema(
     mutation=Mutation,
     auto_camelcase=False,
 )
+
+
+class SchemaWsConsumer(GraphqlWsConsumer):
+    schema = schema
