@@ -11,6 +11,7 @@ query postSet($first: Int, $after: String, $before: String) {
         pk
         id
         endpoint
+        post_title
       }
     }
   }

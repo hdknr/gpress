@@ -11,6 +11,9 @@ class CorsMiddleware(object):
         response['X-CSRFToken'] = get_token(request)
         response['X-IsAuthenticated'] = request.user.is_authenticated
         return response
+    
+    def process_request(self, request):
+        pass
 
     def __init__(self, get_response):
         # https://docs.djangoproject.com/en/3.0/topics/http/middleware/

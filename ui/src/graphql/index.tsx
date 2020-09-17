@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -23,6 +23,11 @@ export type ErrorType = {
 };
 
 
+
+export type LatestPost = {
+  __typename?: 'LatestPost';
+  title?: Maybe<Scalars['String']>;
+};
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -95,6 +100,7 @@ export type PostPostmeta_SetArgs = {
 };
 
 export type PostInput = {
+  id?: Maybe<Scalars['Int']>;
   post_author: Scalars['Int'];
   post_date: Scalars['DateTime'];
   post_date_gmt: Scalars['DateTime'];
@@ -188,6 +194,7 @@ export type PostmetaEdge = {
 };
 
 export type PostmetaInput = {
+  id?: Maybe<Scalars['Int']>;
   meta_key?: Maybe<Scalars['String']>;
   meta_value?: Maybe<Scalars['String']>;
   post: Scalars['String'];
@@ -281,6 +288,31 @@ export type QueryPostmeta_SetArgs = {
   pk?: Maybe<Scalars['Float']>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  latestpost?: Maybe<LatestPost>;
+};
+
+
+export type SubscriptionLatestpostArgs = {
+  arg1?: Maybe<Scalars['String']>;
+  arg2?: Maybe<Scalars['String']>;
+};
+
+export type LatestPostSubscriptionVariables = Exact<{
+  arg1?: Maybe<Scalars['String']>;
+  arg2?: Maybe<Scalars['String']>;
+}>;
+
+
+export type LatestPostSubscription = (
+  { __typename?: 'Subscription' }
+  & { latestpost?: Maybe<(
+    { __typename?: 'LatestPost' }
+    & Pick<LatestPost, 'title'>
+  )> }
+);
+
 export type PostSetQueryVariables = Exact<{
   first?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
@@ -299,13 +331,43 @@ export type PostSetQuery = (
       { __typename?: 'PostNodeSetEdge' }
       & { node?: Maybe<(
         { __typename?: 'Post' }
-        & Pick<Post, 'pk' | 'id' | 'endpoint'>
+        & Pick<Post, 'pk' | 'id' | 'endpoint' | 'post_title'>
       )> }
     )>> }
   )> }
 );
 
 
+export const LatestPostDocument = gql`
+    subscription latestPost($arg1: String, $arg2: String) {
+  latestpost(arg1: $arg1, arg2: $arg2) {
+    title
+  }
+}
+    `;
+
+/**
+ * __useLatestPostSubscription__
+ *
+ * To run a query within a React component, call `useLatestPostSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useLatestPostSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLatestPostSubscription({
+ *   variables: {
+ *      arg1: // value for 'arg1'
+ *      arg2: // value for 'arg2'
+ *   },
+ * });
+ */
+export function useLatestPostSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<LatestPostSubscription, LatestPostSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<LatestPostSubscription, LatestPostSubscriptionVariables>(LatestPostDocument, baseOptions);
+      }
+export type LatestPostSubscriptionHookResult = ReturnType<typeof useLatestPostSubscription>;
+export type LatestPostSubscriptionResult = ApolloReactCommon.SubscriptionResult<LatestPostSubscription>;
 export const PostSetDocument = gql`
     query postSet($first: Int, $after: String, $before: String) {
   post_set(first: $first, after: $after, before: $before) {
@@ -320,6 +382,7 @@ export const PostSetDocument = gql`
         pk
         id
         endpoint
+        post_title
       }
     }
   }
