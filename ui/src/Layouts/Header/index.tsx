@@ -2,7 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 
 
+
 export const Header: React.FunctionComponent = () => {
+    return (
+        <div></div>
+    )
+    /*
     return (
         <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
@@ -18,4 +23,5 @@ export const Header: React.FunctionComponent = () => {
                 Study React
         </a>
         </header>);
+    */
 };

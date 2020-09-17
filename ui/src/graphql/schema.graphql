@@ -15,13 +15,13 @@ scalar GenericScalar
 
 scalar JSONString
 
+type LatestPost {
+  title: String
+}
+
 type Mutation {
   post(input: PostInput!): PostPayload
   postmeta(input: PostmetaInput!): PostmetaPayload
-}
-
-type MySubscription {
-  event: String
 }
 
 interface Node {
@@ -191,5 +191,5 @@ type Query {
 }
 
 type Subscription {
-  my_subscription(arg1: String, arg2: String): MySubscription
+  latestpost(arg1: String, arg2: String): LatestPost
 }

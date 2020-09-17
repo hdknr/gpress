@@ -1,0 +1,5 @@
+subscription latestPost($arg1: String, $arg2: String) {
+  latestpost(arg1: $arg1, arg2: $arg2) {
+      title
+  }
+}

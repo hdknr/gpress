@@ -1,12 +1,13 @@
 import channels_graphql_ws
 import graphene
+from logging import getLogger
+
+logger = getLogger()
 
 
-class MySubscription(channels_graphql_ws.Subscription):
-    """Simple GraphQL subscription."""
-
+class LatestPost(channels_graphql_ws.Subscription):
     # Subscription payload.
-    event = graphene.String()
+    title = graphene.String()
 
     class Arguments:
         """That is how subscription arguments are defined."""
@@ -16,13 +17,14 @@ class MySubscription(channels_graphql_ws.Subscription):
     @staticmethod
     def subscribe(root, info, arg1, arg2):
         """Called when user subscribes."""
-
+        logger.debug(f'LatestPost.subscribe {root} {info} {arg1} {arg2}')
         # Return the list of subscription group names.
-        return ['group42']
+        return ['group42', 'sample']
 
     @staticmethod
     def publish(payload, info, arg1, arg2):
         """Called to notify the client."""
+        logger.debug(f'LatestPost.publish {payload} {info} {arg1} {arg2}')
 
         # Here `payload` contains the `payload` from the `broadcast()`
         # invocation (see below). You can return `MySubscription.SKIP`
@@ -30,9 +32,9 @@ class MySubscription(channels_graphql_ws.Subscription):
         # client. For example, this allows to avoid notifications for
         # the actions made by this particular client.
 
-        return MySubscription(event='Something has happened!')
+        return LatestPost(**payload)
 
 
 class Subscription(graphene.ObjectType):
     """Root GraphQL subscription."""
-    my_subscription = MySubscription.Field()
+    latestpost = LatestPost.Field()

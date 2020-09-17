@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context';
-import { GRAPHQL_URL } from '../../settings';
+import { GRAPHQL_URL, GRAPHQL_URL_WS } from '../../settings';
+import { WebSocketLink } from '@apollo/client/link/ws';
 
 
 const cache = new InMemoryCache();
@@ -31,7 +32,16 @@ const authLink = setContext(async (_, { headers }) => {
         });
 });
 
-const link = authLink.concat(httpLink);
+const wslink = new WebSocketLink({
+    uri: GRAPHQL_URL_WS,
+    options: {
+        reconnect: true
+    }
+})
+
+// const link = authLink.concat(httpLink);
+const link = wslink;
+
 
 export const client = new ApolloClient({
     link, cache

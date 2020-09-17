@@ -2,7 +2,7 @@ import graphene
 from gpress.api import (
     query as gpress_query,
     mutation as gpress_mutation,
-    subscriptions as gress_subs, )
+    subscription as gress_sub, )
 
 from .consumers import GraphqlWsConsumer
 
@@ -20,7 +20,7 @@ class Mutation(
     pass
 
 class Subscription(
-    gress_subs.Subscription,
+    gress_sub.Subscription,
     graphene.ObjectType
 ):
     pass
